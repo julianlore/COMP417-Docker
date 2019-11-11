@@ -11,7 +11,7 @@ all:
 .PHONY: build
 build: A2/src
 	sudo docker build -t mros .
-	touch $(XAUTH)
+	sudo touch $(XAUTH)
 	xauth nlist $$DISPLAY | sed -e 's/^..../ffff/' | xauth -f $(XAUTH) nmerge -
 	sudo docker create -ti --name cmros -v $(XSOCK):$(XSOCK) -v $(XAUTH):$(XAUTH) -v $(shell pwd)/A2:/A2 -e XAUTHORITY=$(XAUTH) -e DISPLAY=$$DISPLAY mros
 
